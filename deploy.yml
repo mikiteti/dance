@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres
+    container_name: dance_db
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./db/initdb:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+
+  app:
+    build: 
+      context: ./backend
+      dockerfile: ./deploy.Dockerfile
+    container_name: dance_app
+    ports:
+     - "3000:3000"
+    depends_on:
+      - db
+    command: npm run deploy
+    environment:
+     - DB_HOST=${DB_HOST}
+     - DB_USER=${DB_USER}
+     - DB_PASSWORD=${DB_PASSWORD}
+     - DB_NAME=${DB_NAME}
+
+volumes:
+  db_data:

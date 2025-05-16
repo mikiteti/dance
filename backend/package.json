@@ -1,0 +1,19 @@
+{
+  "name": "dance_backend",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "deploy": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "mikiteti",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "pg": "^8.16.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
