@@ -9,13 +9,13 @@ services:
     volumes:
       - ./db/initdb:/docker-entrypoint-initdb.d
     ports:
-      - "5432:5432"
+      - ${PORT_DB}:5432
 
   app:
     build: ./backend
     container_name: dance_app
     ports:
-     - "3000:3000"
+     - ${PORT_APP}:3000
     depends_on:
       - db
     command: npm run dev

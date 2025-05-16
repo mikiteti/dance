@@ -10,7 +10,7 @@ services:
       - db_data:/var/lib/postgresql/data
       - ./db/initdb:/docker-entrypoint-initdb.d
     ports:
-      - "5432:5432"
+      - 5432:5432
 
   app:
     build: 
@@ -18,7 +18,7 @@ services:
       dockerfile: ./deploy.Dockerfile
     container_name: dance_app
     ports:
-     - "3000:3000"
+     - 3000:3000
     depends_on:
       - db
     command: npm run deploy
