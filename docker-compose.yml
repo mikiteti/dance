@@ -27,3 +27,15 @@ services:
      - DB_USER=${DB_USER}
      - DB_PASSWORD=${DB_PASSWORD}
      - DB_NAME=${DB_NAME}
+
+  frontend:
+    build: ./frontend
+    container_name: dance_frontend
+    ports:
+      - ${PORT_FRONTEND}:8080
+    depends_on:
+      - app
+    volumes:
+      - ./frontend/src:/app/src
+    environment:
+      - VITE_PORT_APP=${PORT_APP}
