@@ -3,9 +3,6 @@ FROM node AS build
 WORKDIR /app
 COPY . .
 
-ARG VITE_APP_URL
-ENV VITE_APP_URL=${VITE_APP_URL}
-
 RUN npm install
 RUN npm run build
 

@@ -5,28 +5,22 @@ services:
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_DB=dance_db
     volumes:
       - db_data:/var/lib/postgresql/data
       - ./db/initdb:/docker-entrypoint-initdb.d
-    ports:
-      - ${PORT_DB}:5432
 
   app:
     build: 
       context: ./backend
       dockerfile: ./deploy.Dockerfile
     container_name: dance_app
-    ports:
-     - ${PORT_APP}:3000
     depends_on:
       - db
     command: npm run deploy
     environment:
-     - DB_HOST=${DB_HOST}
      - DB_USER=${DB_USER}
      - DB_PASSWORD=${DB_PASSWORD}
-     - DB_NAME=${DB_NAME}
 
   frontend:
     build:
@@ -35,10 +29,19 @@ services:
       args:
         VITE_APP_URL: http://localhost:${PORT_APP}
     container_name: dance_frontend
-    ports:
-      - ${PORT_FRONTEND}:8080
     depends_on:
       - app
+
+  nginx:
+    image: nginx:alpine
+    container_name: dance_nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - 8080:8080
+    depends_on:
+      - app
+      - frontend
 
 volumes:
   db_data:

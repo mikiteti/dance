@@ -7,11 +7,11 @@ const port = 3000;
 app.use(cors());
 
 const pool = new Pool({
-  host: process.env.DB_HOST,
+  host: 'db',
+  database: 'dance_db',
+  port: 5432,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: process.env.PORT_DB,
 });
 
 app.get('/users', async (req, res) => {
