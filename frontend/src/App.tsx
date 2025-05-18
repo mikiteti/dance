@@ -1,38 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Global } from './global.ts'
+import './index.css'
+import { Global } from './global'
+import Title from './components/Title';
+import Competition from './components/Competition';
+
+console.log(Global);
+fetch(`${Global.URL}/hello`).then(res => res.text()).then(res => console.log(res));
+fetch(`${Global.URL}/users`).then(res => res.json()).then(res => console.log(res));
+
+const compdata = {
+  title: 'Budapest Dance Competition',
+  subtitle: 'Orszagos Bajnoksag',
+  list: [
+    { title: 'Szervező', value: 'Marko Stúdió' },
+    { title: 'Időpont', value: '2025. 07. 17.' },
+    { title: 'Helyszín', value: 'Etele út 59.' },
+    { title: 'Nevezési határidő', value: '2025. 07. 12.' },
+  ]
+}
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  console.log(Global);
-  fetch(`${Global.URL}/hello`).then(res => res.text()).then(res => console.log(res));
-  fetch(`${Global.URL}/users`).then(res => res.json()).then(res => console.log(res));
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div className='fixed inset-0 bg-linear-to-br from-[#9cdad6] to-[#717bef] -z-10'></div>
+      <Title value='Következő Versenyek' />
+      <Competition data={compdata} />
     </>
   )
 }

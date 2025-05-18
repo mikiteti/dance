@@ -1,4 +1,4 @@
-FROM node AS build
+FROM node:24-alpine AS build
 
 WORKDIR /app
 COPY . .
@@ -6,7 +6,7 @@ COPY . .
 RUN npm install
 RUN npm run build
 
-FROM node
+FROM node:24-alpine
 
 WORKDIR /app
 RUN npm install -g serve

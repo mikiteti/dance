@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres
+    image: postgres:17-alpine
     container_name: dance_db
     environment:
       - POSTGRES_USER=${DB_USER}
