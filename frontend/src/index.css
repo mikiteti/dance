@@ -1,13 +1,5 @@
 @import 'tailwindcss';
 
 #root {
-  width: 100vw;
-  height: 100vh;
-  color: white;
+  @apply w-full min-h-full text-white top-0;
 }
-
-.glass {
-  @apply shadow-md rounded-4xl not-first:mt-6 mx-auto group-[.glass-active]:shadow-lg bg-[#0003] group-[.glass-active]:bg-[#ffff] backdrop-blur-2xl group-[.glass-active]:text-black;
-}
-
-

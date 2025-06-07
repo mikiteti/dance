@@ -25,8 +25,8 @@ app.get('/users', async (req, res) => {
 });
 
 app.get('/hello', async (req, res) => {
-    res.send('Hello world!');
-    console.log('Hello world sent');
+  res.send('Hello world');
+  console.log('Hello world sent');
 })
 
 app.listen(port, () => {
